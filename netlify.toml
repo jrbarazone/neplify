@@ -1,0 +1,8 @@
+[build]
+  publish = "public"
+  command = "echo 'No build command'"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://7d321884-43b2-47ff-9093-6e9aae782561-00-1d2pikxa2n4q5.worf.replit.dev/:splat"
+  status = 200
