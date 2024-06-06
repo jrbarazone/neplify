@@ -5,9 +5,9 @@ import requests
 app = Flask(__name__)
 
 # Configurar la clave de la API de OpenAI
-openai.api_key = ""
+openai.api_key = "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"
 
-@appmy_secret = os.environ['openai.api_key ='].route('/completar', methods=['POST'])
+@app.route('/completar', methods=['POST'])
 def completar():
     data = request.json
     prompt = data.get('prompt', '')
