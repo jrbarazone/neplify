@@ -1,0 +1,7 @@
+stackbitVersion: ~0.5.0
+project:
+  id: YOUR_PROJECT_ID
+  name: YOUR_PROJECT_NAME
+modelsSource:
+  type: git
+  repository: https://github.com/YOUR_GITHUB_USERNAME/YOUR_PROJECT_REPOSITORY
