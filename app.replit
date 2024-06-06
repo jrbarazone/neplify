@@ -1,0 +1,57 @@
+// Replit deploy script
+await replit_com__jit_plugin.Create___Repl({
+  title: "Proyección Financiera Avanzada",
+  description: "Aplicación Flask que utiliza la API de OpenAI y reenvía datos a Webhook.site.",
+  files: [
+    {
+      path: "app.py",
+      content: `
+from flask import Flask, request, jsonify
+import openai
+import requests
+
+app = Flask(__name__)
+
+# Configurar la clave de la API de OpenAI
+openai.api_key = ""
+
+@app.route('/completar', methods=['POST'])
+def completar():
+    data = request.json
+    prompt = data.get('prompt', '')
+    
+    if not prompt:
+        return jsonify({'error': 'No prompt provided'}), 400
+
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=100
+    )
+    
+    return jsonify(response.choices[0].text)
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    data = request.json
+    forward_url = 'https://webhook.site/gpt'
+    
+    # Reenviar la solicitud a Webhook.site
+    response = requests.post(forward_url, json=data)
+    
+    return jsonify({'status': 'forwarded', 'response_code': response.status_code})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+`
+    },
+    {
+      path: "requirements.txt",
+      content: `
+Flask==2.1.2
+openai==0.10.2
+requests==2.27.1
+`
+    }
+  ]
+});
